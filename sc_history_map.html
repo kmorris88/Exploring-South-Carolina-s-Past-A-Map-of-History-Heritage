@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exploring South Carolina's Past</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        body {
+            background-color: #4B0082; /* Indigo Blue */
+            color: white;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            text-align: center;
+        }
+        #map {
+            height: 600px;
+            width: 80%;
+            margin: auto;
+        }
+        .sidebar {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px auto;
+            width: 80%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Exploring South Carolina's Past: A Map of History & Heritage</h1>
+    <h3>Information compiled by Kimberly Morris</h3>
+    
+    <div class="sidebar">
+        <p>This interactive map was created to spark curiosity about the rich history of the great Palmetto State. It serves as a gateway to South Carolina’s past, designed for historical scholars of all ages. In particular, it is dedicated to school-age students who are eager to explore their local and state history. Through this collection of historical markers and resources, visitors can engage with the people, places, and events that have shaped South Carolina.</p>
+    </div>
+    
+    <div id="map"></div>
+    
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map').setView([33.8361, -81.1637], 7);
+        
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+        
+        var locations = [
+            { lat: 32.8440, lng: -79.8195, title: "Boone Hall Plantation", link: "https://www.boonehallplantation.com/" },
+            { lat: 34.0007, lng: -81.0338, title: "State House Monuments Tour", link: "https://www.historiccolumbia.org/online-tours/state-house-monuments-tour" },
+            { lat: 34.8526, lng: -82.3940, title: "Black History Video Archive", link: "https://www.greenvillesc.gov/2094/Black-History-Video-Archive" },
+            { lat: 32.7523, lng: -79.8747, title: "Fort Sumter Video", link: "https://www.youtube.com/watch?v=1unxs4fpNHg" },
+            { lat: 34.0007, lng: -81.0348, title: "South Carolinians in WWII", link: "https://www.pbs.org/video/south-carolinians-in-wwii-a-path-to-victory-mgwkai/" },
+            { lat: 34.6734, lng: -82.8374, title: "The Education of Harvey Gantt", link: "https://www.pbs.org/video/the-education-of-harvey-gantt-ifqj2x/" },
+            { lat: 32.4316, lng: -80.6698, title: "Robert Smalls - Part 1 (Big Picture)", link: "https://www.knowitall.org/video/robert-smalls-part-1-big-picture" },
+            { lat: 33.5434, lng: -80.4876, title: "Those Who Remain (1991)", link: "https://www.pbs.org/video/those-who-remain-1991-axxmdx/" }
+        ];
+        
+        locations.forEach(location => {
+            L.marker([location.lat, location.lng]).addTo(map)
+                .bindPopup(`<b>${location.title}</b><br><a href='${location.link}' target='_blank'>More Info</a>`);
+        });
+    </script>
+</body>
+</html>
